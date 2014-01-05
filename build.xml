@@ -1,0 +1,45 @@
+<project>
+	<property name="lib.dir"     value="lib"/>
+	
+	<path id="classpath">
+	        <fileset dir="${lib.dir}" includes="**/*.jar"/>
+	</path>
+	
+	<fileset id="dependencies" dir="${lib.dir}" includes="*.jar" />
+	
+	<pathconvert property="manifest.classpath" dirsep="/" pathsep=" "
+	             refid="dependencies">
+	  <map from="${lib.dir}" to="lib" />
+	</pathconvert>
+	
+    <target name="clean">
+        <delete dir="build"/>
+    </target>
+
+    <target name="compile">
+        <mkdir dir="build/classes"/>
+        <javac srcdir="src" destdir="build/classes" classpathref="classpath"/>
+    </target>
+
+    <target name="jar" depends="compile">
+        <mkdir dir="build/jar"/>
+    	
+        <jar destfile="build/jar/ServerViewer.jar" basedir="build/classes">
+        	<zipgroupfileset dir="${lib.dir}" includes="*.jar"/>
+            <manifest>
+                <attribute name="Main-Class" value="ServerViewer"/>
+            	<attribute name="Class-Path" value="${manifest.classpath}" />
+            </manifest>
+        </jar>
+    	 
+    </target>
+	
+    <target name="run" depends="jar">
+        <java jar="build/jar/ServerViewer.jar" fork="true">
+        	<!--classpath>
+        	   <path refid="classpath"/>
+        	</classpath -->
+        </java>
+    </target>
+
+</project>
