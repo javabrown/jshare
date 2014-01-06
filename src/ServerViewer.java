@@ -22,7 +22,14 @@ public class ServerViewer extends JFrame {
         
         
         getContentPane().add(splitPane, BorderLayout.CENTER);
+        
+ 
+        
         setVisible(true);
+        
+        int state = this.getExtendedState();  
+        state = state | this.ICONIFIED;  
+        this.setExtendedState(state); 
     }
 
     public static void main(String[] args) throws Exception {
