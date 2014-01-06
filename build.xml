@@ -1,53 +1,43 @@
 <project>
-	<property name="lib.dir" value="lib"/>
-	<property name="files.dir" value="files"/>
+	  <property name="lib.dir" value="lib"/>
+	  <property name="files.dir" value="files"/>
 	
-	<path id="classpath">
+	  <path id="classpath">
 	        <fileset dir="${lib.dir}" includes="**/*.jar"/>
-	</path>
+	  </path>
+ 
 	
-	<fileset>
-		
-	</fileset>
+	  <fileset id="jar-dependencies" dir="${lib.dir}" includes="*.jar" />
+	  <fileset id="files-dependencies" dir="${files.dir}" includes="**/*.*" />
 	
-	<fileset id="jar-dependencies" dir="${lib.dir}" includes="*.jar" />
-	<fileset id="files-dependencies" dir="${files.dir}" includes="**/*.*" />
-	
-	<pathconvert property="manifest.classpath" dirsep="/" pathsep=" "
+	  <pathconvert property="manifest.classpath" dirsep="/" pathsep=" "
 	             refid="jar-dependencies">
-	  <map from="${lib.dir}" to="lib" />
-	  <map from="${lib.files}" to="files" />
-	</pathconvert>
+	    <map from="${lib.dir}" to="lib" />
+	  </pathconvert>
 	
     <target name="clean">
         <delete dir="build"/>
     </target>
 
-    <target name="compile">
+    <target name="compile" depends="clean">
         <mkdir dir="build/classes"/>
         <javac srcdir="src" destdir="build/classes" classpathref="classpath"/>
     </target>
 
     <target name="jar" depends="compile">
-        <mkdir dir="build/jar"/>
-    	<mkdir dir="build/files"/>
-    	
-        <jar destfile="build/jar/ServerViewer.jar" basedir="build/classes">
-        	<zipgroupfileset dir="${lib.dir}" includes="*.jar"/>     	
-            <manifest>
+         <mkdir dir="build/jar"/>
+         <jar destfile="build/jar/ServerViewer.jar" basedir="build/classes" includes="/**">
+        	 <zipgroupfileset dir="${lib.dir}" includes="*.jar"/>     	
+           <zipgroupfileset dir="${files.dir}" includes="*.jar"/>     
+           <manifest>
                 <attribute name="Main-Class" value="ServerViewer"/>
-            	<attribute name="Class-Path" value="${manifest.classpath}" />
-            </manifest>
-        </jar>
-    	 
+              	<attribute name="Class-Path" value="${classpath}" />
+           </manifest>
+         </jar>
     </target>
 	
     <target name="run" depends="jar">
-        <java jar="build/jar/ServerViewer.jar" fork="true">
-        	<!--classpath>
-        	   <path refid="classpath"/>
-        	</classpath -->
-        </java>
+        <java jar="build/jar/ServerViewer.jar" fork="true"/>
     </target>
 
 </project>
