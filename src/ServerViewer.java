@@ -143,7 +143,7 @@ class BrownControl extends JPanel implements Runnable, ActionListener {
         catch (Exception e) {
           jep.setContentType("text/html");
           jep.setText("<html>Could not load webpage</html>");
-        } 
+        }  
         
 		
         tabbedPane.addTab("About", new JScrollPane(jep));//new JLabel(new ImageIcon(img)));
