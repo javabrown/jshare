@@ -1,5 +1,7 @@
 import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JEditorPane;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -10,6 +12,7 @@ import javax.swing.JTabbedPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.plaf.DimensionUIResource;
+import javax.swing.text.html.HTMLEditorKit;
 
 import org.apache.commons.codec.binary.Base64;
 import org.apache.http.HttpResponse;
@@ -41,6 +44,7 @@ import java.awt.image.BufferedImage;
 import java.awt.image.PixelGrabber;
 import java.io.BufferedReader;
 import java.io.ByteArrayOutputStream;
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
@@ -57,7 +61,7 @@ public class ServerViewer extends JFrame {
     JTextArea _eventLog;
 
     public ServerViewer() throws Exception {
-        setSize(500, 400);
+        setSize(850, 550);
         setDefaultCloseOperation(3);
         _brownControl = new BrownControl();
         _eventLog = new JTextArea();
@@ -65,7 +69,7 @@ public class ServerViewer extends JFrame {
         JSplitPane splitPane = new JSplitPane(JSplitPane.VERTICAL_SPLIT,
         		_brownControl  , new JScrollPane(_eventLog));
        
-        splitPane.setResizeWeight(0.8);
+        splitPane.setResizeWeight(0.7);
         
         
         getContentPane().add(splitPane, BorderLayout.CENTER);
@@ -126,6 +130,23 @@ class BrownControl extends JPanel implements Runnable, ActionListener {
         tabbedPane.addTab("Stream", _brownStage);
         tabbedPane.addTab("Setting", new BrownSetting());
         
+		JEditorPane jep = new JEditorPane();
+		jep.setEditable(false);   
+		jep.setEditorKit(new HTMLEditorKit());
+		
+        try {
+          //jep.setText("<html><img src='file:///Users/rajakhan/Desktop/app-image.png' style='width:500;height:400'/></html>");
+        	File doc = new File("files/about.html");
+        	
+        	jep.setPage(doc.toURI().toURL());
+        }
+        catch (Exception e) {
+          jep.setContentType("text/html");
+          jep.setText("<html>Could not load webpage</html>");
+        } 
+        
+		
+        tabbedPane.addTab("About", new JScrollPane(jep));//new JLabel(new ImageIcon(img)));
         this.add(tabbedPane, BorderLayout.CENTER);
     }
    
