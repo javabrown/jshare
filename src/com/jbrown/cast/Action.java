@@ -4,7 +4,7 @@ public enum Action {
     DOUBLE_CLICK("Dc", "doubleClick"), RIGHT_CLICK("Rc", "rightClick"), LEFT_CLICK(
             "Lc", "click"), KEY_PRESSED("Kp", "keyPress");
 
-    private final String _actionType;
+    private final String _actionType; 
     private final String _methodName;
 
     Action(String actionType, String methodName) {
