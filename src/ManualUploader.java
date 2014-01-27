@@ -593,7 +593,7 @@ class ImageFetcher {
       }
     }
     System.out.println("Done");
-  } 
+  }
 
   private static InputStream compressAndSave(BufferedImage image, int index)
       throws IOException {
