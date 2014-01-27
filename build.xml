@@ -1,7 +1,7 @@
 <project>
 	  <property name="lib.dir" value="lib"/>
 	  <property name="files.dir" value="files"/>
-	
+ 
 	  <path id="classpath">
 	        <fileset dir="${lib.dir}" includes="**/*.jar"/>
 	  </path>
@@ -12,7 +12,7 @@
 	
 	  <pathconvert property="manifest.classpath" dirsep="/" pathsep=" "
 	             refid="jar-dependencies">
-	    <map from="${lib.dir}" to="lib" />
+  	    <map from="${lib.dir}" to="lib" />
 	  </pathconvert>
 	
     <target name="clean">
@@ -21,6 +21,7 @@
 
     <target name="compile" depends="clean">
         <mkdir dir="build/classes"/>
+      	<copydir src="files/resources" dest="build/classes"/>
         <javac srcdir="src" destdir="build/classes" classpathref="classpath"/>
     </target>
 
