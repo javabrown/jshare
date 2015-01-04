@@ -157,7 +157,6 @@ class Base64Encoder {
       if (len <= 0)
         break;
       buffer.append(Base64Coder.encode(buf, 0, len));
-      // out.newLine();
     }
     return buffer.toString();
   }
@@ -218,8 +217,8 @@ class Base64Encoder {
 class Base64Coder {
 
   // The line separator string of the operating system.
-  private static final String systemLineSeparator = System
-                                                      .getProperty("line.separator");
+  private static final String systemLineSeparator = 
+                 System.getProperty("line.separator");
 
   // Mapping table from 6-bit nibbles to Base64 characters.
   private static final char[] map1                = new char[64];
