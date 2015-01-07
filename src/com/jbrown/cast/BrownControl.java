@@ -71,7 +71,6 @@ public class BrownControl extends JPanel implements Runnable, ActionListener {
 		jep.setEditorKit(new HTMLEditorKit());
 		
         try {
-          //jep.setText("<html><img src='file:///Users/rajakhan/Desktop/app-image.png' style='width:500;height:400'/></html>");
         	File doc = new File("files/about.html");
         	
         	jep.setPage(doc.toURI().toURL());

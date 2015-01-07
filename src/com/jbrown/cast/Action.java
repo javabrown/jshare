@@ -20,12 +20,6 @@ public enum Action {
         return _methodName;
     }
 
-    //
-    // public Class getActionClass() throws ClassNotFoundException {
-    // Class clazz = Class.forName(_actionType+"Act");
-    // return clazz;
-    // }
-
     public static Action getInstance(String actionName) throws Exception {
         for (Action type : Action.values()) {
             if (type.getActionName().equalsIgnoreCase(actionName)) {
