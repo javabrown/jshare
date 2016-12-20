@@ -1,7 +1,7 @@
 jshare
 ======
 
-jShare is an open source "Remote desktop broadcasting" application designed and developed by Raja Khan. This is a JFC/Swing based application written in pure-java, designed to support cross platform operating system. The application is fully functional and tested in Windows, MacOS, Linux Ubantu. And, time-by-time we are adding features to it. Its integration in any specific projects or uses need authorization from Raja Khan (javabrown.com).
+jShare is a "Remote desktop share/broadcasting" application. This is a JFC/Swing based application written in pure-java, designed to support cross platform operating system. It has the ability to connect to the host and record the session (hardware events - keyboard, mouse, audio-out). The application is fully functional and tested in Windows, MacOS, Linux Ubantu. And, time-by-time I am adding features into it. It's integration in any specific projects or uses need authorization from Raja Khan (javabrown.com).
 
 
 
